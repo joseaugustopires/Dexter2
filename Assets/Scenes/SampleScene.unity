@@ -238,6 +238,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 797835559}
+<<<<<<< HEAD
+=======
+  - {fileID: 1673124735}
+>>>>>>> 37e040938f00c655cb4aafc93cebb4c0bb342fd3
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -429,8 +433,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797835557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 0.0172, y: 1.03, z: 10}
   m_LocalScale: {x: 0.69092894, y: 0.6915354, z: 1}
+=======
+  m_LocalPosition: {x: 0.11, y: 1.03, z: 10}
+  m_LocalScale: {x: 0.6850376, y: 0.6915354, z: 1}
+>>>>>>> 37e040938f00c655cb4aafc93cebb4c0bb342fd3
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -575,7 +584,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1548129601
 BoxCollider2D:
@@ -680,12 +689,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673124733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.0432, y: -4.4, z: 0}
   m_LocalScale: {x: 4.5804086, y: 4.3843, z: 1}
+=======
+  m_LocalPosition: {x: 0.07, y: -2.82, z: 10}
+  m_LocalScale: {x: 4.5317936, y: 4.3843, z: 1}
+>>>>>>> 37e040938f00c655cb4aafc93cebb4c0bb342fd3
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1728486378
 GameObject:
@@ -803,7 +817,11 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> 37e040938f00c655cb4aafc93cebb4c0bb342fd3
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1728486382
@@ -819,7 +837,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 2
+=======
+  m_RootOrder: 3
+>>>>>>> 37e040938f00c655cb4aafc93cebb4c0bb342fd3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1728486383
 MonoBehaviour:
@@ -835,6 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpForce: 8.5
+<<<<<<< HEAD
   rb: {fileID: 0}
   spriteRenderer: {fileID: 0}
   moveDirection: 0
@@ -971,3 +994,5 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> 37e040938f00c655cb4aafc93cebb4c0bb342fd3
