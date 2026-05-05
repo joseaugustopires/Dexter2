@@ -3,17 +3,34 @@ using UnityEngine;
 public class InteracaoJornal : MonoBehaviour
 {
     public GameObject painelMensagem;
+    public GameObject painelObjetivo;
 
     void Start()
     {
-        painelMensagem.SetActive(false);
+        if (painelMensagem != null)
+        {
+            painelMensagem.SetActive(false);
+        }
+
+        if (painelObjetivo != null)
+        {
+            painelObjetivo.SetActive(false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            painelMensagem.SetActive(true);
+            if (painelMensagem != null)
+            {
+                painelMensagem.SetActive(true);
+            }
+
+            if (painelObjetivo != null)
+            {
+                painelObjetivo.SetActive(true);
+            }
         }
     }
 
@@ -21,7 +38,15 @@ public class InteracaoJornal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            painelMensagem.SetActive(false);
+            if (painelMensagem != null)
+            {
+                painelMensagem.SetActive(false);
+            }
+
+            if (painelObjetivo != null)
+            {
+                painelObjetivo.SetActive(false);
+            }
         }
     }
 }
