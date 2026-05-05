@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 8f; // Força do pulo que você pode ajustar no Unity
-    
+ 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer; // Componente responsável por desenhar e virar o sprite
     private float moveDirection;
@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Verifica se apertou a barra de Espaço
-        if (Input.GetButtonDown("Jump")) 
+        if (Input.GetButtonDown("Jump"))
         {
             // Dá um empurrãozinho para cima
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
