@@ -12,7 +12,7 @@ public class DanoInimigo : MonoBehaviour
 
             if (vidaDexter != null)
             {
-                vidaDexter.TomarDano(dano);
+                vidaDexter.TomarDano(dano, transform);
             }
         }
     }
