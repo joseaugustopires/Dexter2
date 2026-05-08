@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Fase1_Miami.unity
+    guid: 5b6ef9a846508ae4eb43bb2c3ddb3c0d
+  - enabled: 1
+    path: Assets/Scenes/Fase2_Caminhonete.unity
+    guid: e7f2f5c9e2a30184f91a2baee3582d73
   m_configObjects: {}
