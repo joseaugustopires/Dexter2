@@ -8,6 +8,20 @@ public class DanoInimigo : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            DarkPassengerDexter darkPassenger = collision.GetComponent<DarkPassengerDexter>();
+
+            if (darkPassenger != null && darkPassenger.estaAtivo)
+            {
+                VidaInimigo vidaInimigo = GetComponent<VidaInimigo>();
+
+                if (vidaInimigo != null)
+                {
+                    vidaInimigo.TomarDano(999);
+                }
+
+                return;
+            }
+
             VidaDexter vidaDexter = collision.GetComponent<VidaDexter>();
 
             if (vidaDexter != null)
