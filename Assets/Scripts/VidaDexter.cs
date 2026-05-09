@@ -31,6 +31,13 @@ public class VidaDexter : MonoBehaviour
 
     public void TomarDano(int dano, Transform origemDano)
     {
+        DarkPassengerDexter darkPassenger = GetComponent<DarkPassengerDexter>();
+
+        if (darkPassenger != null && darkPassenger.estaAtivo)
+        {
+            return;
+        }
+
         if (invulneravel)
         {
             return;
