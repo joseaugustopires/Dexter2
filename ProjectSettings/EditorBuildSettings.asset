@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fase2_Caminhonete.unity
     guid: e7f2f5c9e2a30184f91a2baee3582d73
+  - enabled: 1
+    path: Assets/Scenes/Fase3_Doakes.unity
+    guid: 46373d89edb1aac42b437b5d147b5d2b
   m_configObjects: {}
