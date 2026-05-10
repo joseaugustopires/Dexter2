@@ -30,7 +30,7 @@ public class ProjetilFaca : MonoBehaviour
 
         if (vidaInimigo != null)
         {
-            vidaInimigo.TomarDano(dano);
+            vidaInimigo.TomarDano(dano, transform);
             Destroy(gameObject);
         }
     }

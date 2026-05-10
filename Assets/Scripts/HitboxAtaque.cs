@@ -10,7 +10,7 @@ public class HitboxAtaque : MonoBehaviour
 
         if (vidaInimigo != null)
         {
-            vidaInimigo.TomarDano(dano);
+            vidaInimigo.TomarDano(dano, transform);
         }
     }
 }
