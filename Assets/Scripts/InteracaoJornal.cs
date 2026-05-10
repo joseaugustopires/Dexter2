@@ -5,19 +5,6 @@ public class InteracaoJornal : MonoBehaviour
     public GameObject painelMensagem;
     public GameObject painelObjetivo;
 
-    void Start()
-    {
-        if (painelMensagem != null)
-        {
-            painelMensagem.SetActive(false);
-        }
-
-        if (painelObjetivo != null)
-        {
-            painelObjetivo.SetActive(false);
-        }
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -31,6 +18,8 @@ public class InteracaoJornal : MonoBehaviour
             {
                 painelObjetivo.SetActive(true);
             }
+
+            ProgressoFase1.MarcarJornalLido();
         }
     }
 
@@ -43,10 +32,8 @@ public class InteracaoJornal : MonoBehaviour
                 painelMensagem.SetActive(false);
             }
 
-            if (painelObjetivo != null)
-            {
-                painelObjetivo.SetActive(false);
-            }
+            // Eu recomendo NÃO esconder o objetivo depois que ele leu o jornal.
+            // Por isso deixei o painelObjetivo ligado.
         }
     }
 }
