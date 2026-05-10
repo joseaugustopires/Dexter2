@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 2070706605884982205}
   - component: {fileID: 3295848952872774087}
   - component: {fileID: 7787649658660402574}
-  - component: {fileID: -8808681678587549960}
-  - component: {fileID: 7300681166377379708}
+  - component: {fileID: 6989206507091030037}
   m_Layer: 0
   m_Name: Evidencia
   m_TagString: Untagged
@@ -113,28 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &-8808681678587549960
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702320587412504470}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &7300681166377379708
+--- !u!114 &6989206507091030037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,9 +121,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 702320587412504470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47c9b609a0a98ef4cbfff68231ac1009, type: 3}
+  m_Script: {fileID: 11500000, guid: 42596abade3cf2147b878589ac38fd94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 4
-  tempoDeVidaDepoisDoChute: 3
-  dano: 999
