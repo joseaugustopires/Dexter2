@@ -4,30 +4,79 @@ public class DanoInimigo : MonoBehaviour
 {
     public int dano = 1;
 
+    [Header("Pulo por cima")]
+    public bool permitirPularPorCima = true;
+    public float alturaMinimaParaIgnorarDano = 0.7f;
+    public bool precisaEstarCaindo = true;
+
+    [Header("Tempo entre danos")]
+    public float tempoEntreDanos = 0.8f;
+
+    private float ultimoTempoDano = -999f;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        TentarDarDano(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        TentarDarDano(collision);
+    }
+
+    void TentarDarDano(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
         {
-            DarkPassengerDexter darkPassenger = collision.GetComponent<DarkPassengerDexter>();
+            return;
+        }
 
-            if (darkPassenger != null && darkPassenger.estaAtivo)
+        DarkPassengerDexter darkPassenger = collision.GetComponent<DarkPassengerDexter>();
+
+        if (darkPassenger != null && darkPassenger.estaAtivo)
+        {
+            VidaInimigo vidaInimigo = GetComponent<VidaInimigo>();
+
+            if (vidaInimigo != null)
             {
-                VidaInimigo vidaInimigo = GetComponent<VidaInimigo>();
+                vidaInimigo.TomarDano(999, collision.transform);
+            }
 
-                if (vidaInimigo != null)
-                {
-                    vidaInimigo.TomarDano(999);
-                }
+            return;
+        }
 
+        if (permitirPularPorCima)
+        {
+            float diferencaAltura = collision.transform.position.y - transform.position.y;
+
+            bool estaAltoOSuficiente = diferencaAltura >= alturaMinimaParaIgnorarDano;
+
+            bool estaCaindo = true;
+
+            Rigidbody2D rbPlayer = collision.GetComponent<Rigidbody2D>();
+
+            if (rbPlayer != null && precisaEstarCaindo)
+            {
+                estaCaindo = rbPlayer.velocity.y <= 0;
+            }
+
+            if (estaAltoOSuficiente && estaCaindo)
+            {
                 return;
             }
+        }
 
-            VidaDexter vidaDexter = collision.GetComponent<VidaDexter>();
+        if (Time.time < ultimoTempoDano + tempoEntreDanos)
+        {
+            return;
+        }
 
-            if (vidaDexter != null)
-            {
-                vidaDexter.TomarDano(dano, transform);
-            }
+        VidaDexter vidaDexter = collision.GetComponent<VidaDexter>();
+
+        if (vidaDexter != null)
+        {
+            ultimoTempoDano = Time.time;
+            vidaDexter.TomarDano(dano, transform);
         }
     }
 }
