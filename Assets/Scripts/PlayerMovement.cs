@@ -5,12 +5,15 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 8f;
 
+    [Header("Checagem de chão")]
     public Transform checarChao;
     public LayerMask camadaChao;
-    public float raioChecarChao = 0.15f;
+    public float raioChecarChao = 0.25f;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Collider2D colisorPlayer;
+
     private float moveDirection;
     private bool estaNoChao;
 
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        colisorPlayer = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -33,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = true;
         }
 
-        estaNoChao = Physics2D.OverlapCircle(checarChao.position, raioChecarChao, camadaChao);
+        VerificarChao();
 
         if (Input.GetButtonDown("Jump") && estaNoChao)
         {
@@ -44,6 +48,28 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
+    }
+
+    void VerificarChao()
+    {
+        bool tocandoPeloChecarChao = false;
+        bool tocandoPeloCollider = false;
+
+        if (checarChao != null)
+        {
+            tocandoPeloChecarChao = Physics2D.OverlapCircle(
+                checarChao.position,
+                raioChecarChao,
+                camadaChao
+            );
+        }
+
+        if (colisorPlayer != null)
+        {
+            tocandoPeloCollider = colisorPlayer.IsTouchingLayers(camadaChao);
+        }
+
+        estaNoChao = tocandoPeloChecarChao || tocandoPeloCollider;
     }
 
     private void OnDrawGizmosSelected()

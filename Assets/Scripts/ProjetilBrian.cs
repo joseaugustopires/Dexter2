@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class ProjetilBrian : MonoBehaviour
 {
-    public float velocidade = 5f;
+    public float velocidade = 6f;
     public float tempoDeVida = 4f;
     public int dano = 1;
 
-    private Vector3 direcao;
+    public LayerMask camadaObstaculo;
 
-    public void Configurar(Vector3 alvo)
+    private float direcao = -1f;
+
+    public void ConfigurarDirecao(float novaDirecao)
     {
-        direcao = (alvo - transform.position).normalized;
+        direcao = novaDirecao;
+
+        Vector3 escala = transform.localScale;
+        escala.x = Mathf.Abs(escala.x) * direcao;
+        transform.localScale = escala;
+
         Destroy(gameObject, tempoDeVida);
     }
 
     void Update()
     {
-        transform.position += direcao * velocidade * Time.deltaTime;
+        transform.position += Vector3.right * direcao * velocidade * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +37,12 @@ public class ProjetilBrian : MonoBehaviour
                 vidaDexter.TomarDano(dano, transform);
             }
 
+            Destroy(gameObject);
+            return;
+        }
+
+        if (((1 << collision.gameObject.layer) & camadaObstaculo) != 0)
+        {
             Destroy(gameObject);
         }
     }
