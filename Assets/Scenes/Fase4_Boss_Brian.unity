@@ -2004,7 +2004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 248.5, y: 167.41}
+  m_AnchoredPosition: {x: 281.53, y: 174}
   m_SizeDelta: {x: 265.2, y: 31.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007390625
@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjetil: {fileID: 5640232756231550170, guid: e46d6b12b4af9094cac0a2599ebae262, type: 3}
-  intervaloAtaque: 2
+  intervaloAtaque: 1.6
   alturaDisparo: 0.4
   velocidadeAproximacao: 1.4
   distanciaMinimaDoPlayer: 2.2
