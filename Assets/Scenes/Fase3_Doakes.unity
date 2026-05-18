@@ -2783,9 +2783,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limiteMovimento: 0.1
+  checarChao: {fileID: 1838185860}
+  raioChecagemChao: 0.35
   camadaChao:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
 --- !u!95 &1728486389
 Animator:
   serializedVersion: 5
