@@ -3203,6 +3203,8 @@ MonoBehaviour:
   camadaChao:
     serializedVersion: 2
     m_Bits: 72
+  velocidadeMinimaPulo: 0.1
+  tempoMinimoAnimacaoPulo: 0.14
 --- !u!1 &1751284750
 GameObject:
   m_ObjectHideFlags: 0

@@ -3235,6 +3235,8 @@ MonoBehaviour:
   camadaChao:
     serializedVersion: 2
     m_Bits: 72
+  velocidadeMinimaPulo: 0.1
+  tempoMinimoAnimacaoPulo: 0.14
 --- !u!95 &1728486389
 Animator:
   serializedVersion: 5
