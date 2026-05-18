@@ -10,8 +10,14 @@ public class AnimacaoDexter : MonoBehaviour
 
     [Header("Checagem de chão")]
     public Transform checarChao;
-    public float raioChecagemChao = 0.35f;
+    public float raioChecagemChao = 0.18f;
     public LayerMask camadaChao;
+
+    [Header("Pulo")]
+    public float velocidadeMinimaPulo = 0.1f;
+    public float tempoMinimoAnimacaoPulo = 0.18f;
+
+    private float tempoPulando = 0f;
 
     void Start()
     {
@@ -39,23 +45,51 @@ public class AnimacaoDexter : MonoBehaviour
 
     void AtualizarPulo()
     {
-        if (animator == null)
+        if (animator == null || rb == null)
         {
             return;
         }
 
-        bool estaNoChao = false;
+        bool estaNoChao = EstaEncostandoNoChao();
+        bool estaSubindoOuCaindo = Mathf.Abs(rb.velocity.y) > velocidadeMinimaPulo;
 
-        if (checarChao != null)
+        if (Input.GetButtonDown("Jump"))
         {
-            estaNoChao = Physics2D.OverlapCircle(
-                checarChao.position,
-                raioChecagemChao,
-                camadaChao
-            );
+            tempoPulando = tempoMinimoAnimacaoPulo;
         }
 
-        animator.SetBool("Pulando", !estaNoChao);
+        if (tempoPulando > 0)
+        {
+            tempoPulando -= Time.deltaTime;
+        }
+
+        bool deveMostrarPulo = tempoPulando > 0 || !estaNoChao || estaSubindoOuCaindo;
+
+        animator.SetBool("Pulando", deveMostrarPulo);
+    }
+
+    bool EstaEncostandoNoChao()
+    {
+        if (checarChao == null)
+        {
+            return false;
+        }
+
+        Collider2D[] colisores = Physics2D.OverlapCircleAll(
+            checarChao.position,
+            raioChecagemChao,
+            camadaChao
+        );
+
+        foreach (Collider2D colisor in colisores)
+        {
+            if (colisor != null && !colisor.isTrigger)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void AtualizarAtaques()
