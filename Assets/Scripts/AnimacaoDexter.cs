@@ -17,12 +17,19 @@ public class AnimacaoDexter : MonoBehaviour
     public float velocidadeMinimaPulo = 0.1f;
     public float tempoMinimoAnimacaoPulo = 0.18f;
 
+    [Header("Ataque")]
+    public float tempoEntreFacadas = 0.35f;
+
     private float tempoPulando = 0f;
+    private float tempoProximaFacada = 0f;
+    private bool usarPrimeiraFacada = true;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        usarPrimeiraFacada = true;
     }
 
     void Update()
@@ -101,13 +108,34 @@ public class AnimacaoDexter : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            animator.SetTrigger("Atacar");
+            TocarFacada();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
             animator.SetTrigger("JogarFaca");
         }
+    }
+
+    void TocarFacada()
+    {
+        if (Time.time < tempoProximaFacada)
+        {
+            return;
+        }
+
+        tempoProximaFacada = Time.time + tempoEntreFacadas;
+
+        if (usarPrimeiraFacada)
+        {
+            animator.Play("Dexter_Facada", 0, 0f);
+        }
+        else
+        {
+            animator.Play("Dexter_Facada2", 0, 0f);
+        }
+
+        usarPrimeiraFacada = !usarPrimeiraFacada;
     }
 
     void OnDrawGizmosSelected()

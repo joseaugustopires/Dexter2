@@ -2011,6 +2011,7 @@ MonoBehaviour:
     m_Bits: 8
   velocidadeMinimaPulo: 0.1
   tempoMinimoAnimacaoPulo: 0.14
+  tempoEntreFacadas: 0.4
 --- !u!95 &1728486385
 Animator:
   serializedVersion: 5
