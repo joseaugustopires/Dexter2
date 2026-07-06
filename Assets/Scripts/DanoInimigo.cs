@@ -13,6 +13,17 @@ public class DanoInimigo : MonoBehaviour
     public float tempoEntreDanos = 0.8f;
 
     private float ultimoTempoDano = -999f;
+    private AnimacaoPolicial animacaoPolicial;
+
+    private void Start()
+    {
+        // Busca o script de animação no próprio objeto ou no objeto pai
+        animacaoPolicial = GetComponent<AnimacaoPolicial>();
+        if (animacaoPolicial == null)
+        {
+            animacaoPolicial = GetComponentInParent<AnimacaoPolicial>();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -48,9 +59,7 @@ public class DanoInimigo : MonoBehaviour
         if (permitirPularPorCima)
         {
             float diferencaAltura = collision.transform.position.y - transform.position.y;
-
             bool estaAltoOSuficiente = diferencaAltura >= alturaMinimaParaIgnorarDano;
-
             bool estaCaindo = true;
 
             Rigidbody2D rbPlayer = collision.GetComponent<Rigidbody2D>();
@@ -77,6 +86,13 @@ public class DanoInimigo : MonoBehaviour
         {
             ultimoTempoDano = Time.time;
             vidaDexter.TomarDano(dano, transform);
+
+            // GATILHOS DA ANIMAÇÃO
+            if (animacaoPolicial != null)
+            {
+                animacaoPolicial.VirarParaPlayer(); // Vira na direção correta
+                animacaoPolicial.TocarAtaque();     // Toca a animação de ataque
+            }
         }
     }
 }

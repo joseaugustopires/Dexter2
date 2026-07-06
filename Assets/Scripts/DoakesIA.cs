@@ -20,9 +20,15 @@ public class DoakesIA : MonoBehaviour
     private bool podeAtacar = true;
     private float alturaInicial;
 
+    // NOVA ADIÇÃO: Referência para controlar as animações do Doakes
+    private Animator animator;
+
     void Start()
     {
         alturaInicial = transform.position.y;
+
+        // NOVA ADIÇÃO: Busca o Animator no objeto do Doakes assim que o jogo começa
+        animator = GetComponent<Animator>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
@@ -76,6 +82,12 @@ public class DoakesIA : MonoBehaviour
     IEnumerator Atacar()
     {
         podeAtacar = false;
+
+        // NOVA ADIÇÃO: Toca a animação de ataque definindo o Gatilho (Trigger) "Atacar" no Animator
+        if (animator != null)
+        {
+            animator.SetTrigger("Atacar");
+        }
 
         if (prefabProjetil != null && player != null)
         {

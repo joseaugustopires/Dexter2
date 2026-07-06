@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dano: 1
   permitirPularPorCima: 1
-  alturaMinimaParaIgnorarDano: 0.7
+  alturaMinimaParaIgnorarDano: 1.2
   precisaEstarCaindo: 1
   tempoEntreDanos: 0.8
 --- !u!50 &374004370
@@ -1177,7 +1177,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.045976274, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1188,7 +1188,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4789276, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &374004374
 SpriteRenderer:
@@ -2389,7 +2389,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0050809085, y: 0}
+  m_Offset: {x: 0.028069481, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2400,7 +2400,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9898382, y: 1}
+  m_Size: {x: 0.6066961, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1357408582
 SpriteRenderer:
@@ -2550,7 +2550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dano: 1
   permitirPularPorCima: 1
-  alturaMinimaParaIgnorarDano: 0.7
+  alturaMinimaParaIgnorarDano: 1.2
   precisaEstarCaindo: 1
   tempoEntreDanos: 0.8
 --- !u!114 &1357408588
@@ -3423,7 +3423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dano: 1
   permitirPularPorCima: 1
-  alturaMinimaParaIgnorarDano: 0.7
+  alturaMinimaParaIgnorarDano: 1.2
   precisaEstarCaindo: 1
   tempoEntreDanos: 0.8
 --- !u!50 &1967477153
@@ -3506,7 +3506,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.053639926, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3517,7 +3517,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5249043, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1967477157
 SpriteRenderer:

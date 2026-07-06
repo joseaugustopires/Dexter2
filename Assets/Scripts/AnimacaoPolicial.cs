@@ -97,7 +97,8 @@ public class AnimacaoPolicial : MonoBehaviour
         transform.localScale = escala;
     }
 
-    void VirarParaPlayer()
+    // AQUI ESTÁ A CORREÇÃO: Adicionamos o "public" para o DanoInimigo conseguir acessar!
+    public void VirarParaPlayer()
     {
         if (player == null)
         {
