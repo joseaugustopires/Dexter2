@@ -11,6 +11,10 @@ public class DoakesIA : MonoBehaviour
     public float intervaloAtaque = 2f;
     public float alturaDisparo = 0.4f;
 
+    [Header("Configuração de Sprites Assimétricos")]
+    [Tooltip("Tempo (em segundos) que o Doakes passa exibindo a animação de tiro antes de voltar a correr.")]
+    public float duracaoAnimacaoAtaque = 0.5f;
+
     [Header("Detecção de obstáculo")]
     public LayerMask camadaObstaculo;
     public float distanciaChecarObstaculo = 0.8f;
@@ -19,15 +23,14 @@ public class DoakesIA : MonoBehaviour
     private Transform player;
     private bool podeAtacar = true;
     private float alturaInicial;
-
-    // NOVA ADIÇÃO: Referência para controlar as animações do Doakes
     private Animator animator;
+
+    // Flag interna para sabermos se ele está executando os frames de tiro
+    private bool estaAtacandoVisual = false;
 
     void Start()
     {
         alturaInicial = transform.position.y;
-
-        // NOVA ADIÇÃO: Busca o Animator no objeto do Doakes assim que o jogo começa
         animator = GetComponent<Animator>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -47,6 +50,12 @@ public class DoakesIA : MonoBehaviour
 
         float distancia = Vector2.Distance(transform.position, player.position);
 
+        if (distancia <= distanciaParaPerseguir)
+        {
+            float direcao = player.position.x > transform.position.x ? 1f : -1f;
+            Virar(direcao);
+        }
+
         if (distancia <= distanciaParaPerseguir && distancia > distanciaMinima)
         {
             PerseguirPlayer();
@@ -64,26 +73,20 @@ public class DoakesIA : MonoBehaviour
 
         if (TemObstaculoNaFrente(direcao))
         {
-            // Se tiver uma caixa/obstáculo na frente, o Doakes para.
-            // Assim o Dexter consegue usar a caixa para fugir ou ganhar distância.
-            Virar(direcao);
             return;
         }
 
         transform.position += Vector3.right * direcao * velocidade * Time.deltaTime;
 
-        // Mantém o Doakes preso na altura inicial dele,
-        // para ele não subir junto quando o Dexter pula.
+        // Mantém o Doakes preso na altura inicial dele
         transform.position = new Vector3(transform.position.x, alturaInicial, transform.position.z);
-
-        Virar(direcao);
     }
 
     IEnumerator Atacar()
     {
         podeAtacar = false;
+        estaAtacandoVisual = true; // ATIVA a inversão de sinal porque os sprites de tiro são opostos
 
-        // NOVA ADIÇÃO: Toca a animação de ataque definindo o Gatilho (Trigger) "Atacar" no Animator
         if (animator != null)
         {
             animator.SetTrigger("Atacar");
@@ -102,7 +105,17 @@ public class DoakesIA : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(intervaloAtaque);
+        // Espera o tempo exato que o Doakes passa atirando na tela
+        yield return new WaitForSeconds(duracaoAnimacaoAtaque);
+        
+        estaAtacandoVisual = false; // DESATIVA a inversão para que ele volte a correr olhando para frente normal
+
+        // Espera o restante do tempo de recarga (cooldown) antes do próximo tiro
+        float tempoRestanteCooldown = intervaloAtaque - duracaoAnimacaoAtaque;
+        if (tempoRestanteCooldown > 0f)
+        {
+            yield return new WaitForSeconds(tempoRestanteCooldown);
+        }
 
         podeAtacar = true;
     }
@@ -129,7 +142,18 @@ public class DoakesIA : MonoBehaviour
     void Virar(float direcaoAtual)
     {
         Vector3 escala = transform.localScale;
-        escala.x = Mathf.Abs(escala.x) * direcaoAtual;
+        
+        if (estaAtacandoVisual)
+        {
+            // Se ele estiver atirando, usamos o sinal INVERTIDO para compensar a arte original
+            escala.x = Mathf.Abs(escala.x) * -direcaoAtual; 
+        }
+        else
+        {
+            // Se estiver correndo ou parado, usamos o sinal NORMAL
+            escala.x = Mathf.Abs(escala.x) * direcaoAtual; 
+        }
+        
         transform.localScale = escala;
     }
 

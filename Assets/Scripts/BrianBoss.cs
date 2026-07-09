@@ -7,11 +7,13 @@ public class BrianBoss : MonoBehaviour
     public GameObject prefabProjetil;
     public float intervaloAtaque = 2.5f;
     public float alturaDisparo = 0.4f;
+    
+    [Tooltip("Tempo (em segundos) que a animação de ataque dura antes de voltar para a corrida.")]
+    public float duracaoAnimacaoAtaque = 0.5f;
 
     [Header("Movimento")]
     public float velocidadeAproximacao = 1.4f;
     public float distanciaMinimaDoPlayer = 2.2f;
-    public bool seguirDepoisDeTomarDano = true;
 
     [Header("Chão")]
     public bool manterNoChao = true;
@@ -19,24 +21,31 @@ public class BrianBoss : MonoBehaviour
     private Transform player;
     private bool podeAtacar = true;
     private bool foiAtingido = false;
+    private bool estaAtirando = false;
 
     private float alturaInicial;
     private VidaInimigo vidaInimigo;
     private int vidaInicial;
+    
+    private Animator animator;
 
     void Start()
     {
         alturaInicial = transform.position.y;
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
 
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             player = playerObj.transform;
         }
 
         vidaInimigo = GetComponent<VidaInimigo>();
-
         if (vidaInimigo != null)
         {
             vidaInicial = vidaInimigo.vida;
@@ -51,10 +60,9 @@ public class BrianBoss : MonoBehaviour
         }
 
         VerificarSeTomouDano();
-
         VirarParaPlayer();
 
-        if (foiAtingido && seguirDepoisDeTomarDano)
+        if (!estaAtirando)
         {
             AproximarDoPlayer();
         }
@@ -79,12 +87,7 @@ public class BrianBoss : MonoBehaviour
 
     void VerificarSeTomouDano()
     {
-        if (vidaInimigo == null)
-        {
-            return;
-        }
-
-        if (vidaInimigo.vida < vidaInicial)
+        if (vidaInimigo != null && vidaInimigo.vida < vidaInicial)
         {
             foiAtingido = true;
         }
@@ -100,7 +103,6 @@ public class BrianBoss : MonoBehaviour
         }
 
         float direcao = player.position.x > transform.position.x ? 1f : -1f;
-
         transform.position += Vector3.right * direcao * velocidadeAproximacao * Time.deltaTime;
     }
 
@@ -116,6 +118,12 @@ public class BrianBoss : MonoBehaviour
     IEnumerator Atacar()
     {
         podeAtacar = false;
+        estaAtirando = true;
+
+        if (animator != null)
+        {
+            animator.SetBool("atacar", true);
+        }
 
         if (prefabProjetil != null && player != null)
         {
@@ -128,7 +136,6 @@ public class BrianBoss : MonoBehaviour
             );
 
             GameObject projetil = Instantiate(prefabProjetil, posicaoDisparo, Quaternion.identity);
-
             ProjetilBrian scriptProjetil = projetil.GetComponent<ProjetilBrian>();
 
             if (scriptProjetil != null)
@@ -137,7 +144,20 @@ public class BrianBoss : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(intervaloAtaque);
+        yield return new WaitForSeconds(duracaoAnimacaoAtaque);
+
+        if (animator != null)
+        {
+            animator.SetBool("atacar", false);
+        }
+        
+        estaAtirando = false;
+
+        float tempoRestanteCooldown = intervaloAtaque - duracaoAnimacaoAtaque;
+        if (tempoRestanteCooldown > 0f)
+        {
+            yield return new WaitForSeconds(tempoRestanteCooldown);
+        }
 
         podeAtacar = true;
     }
